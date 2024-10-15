@@ -3,7 +3,7 @@
 
 <template>
     <div class="flex items-center w-full h-full">
-        <div class="flex justify-center items-center grow">
+        <div class="flex relative justify-center items-center grow">
             <div class="mx-auto w-6/12">
                 <div class="font-sen text-center">
                     <h5 class="font-bold text-5xl">Welcome back!</h5>
@@ -31,6 +31,9 @@
                     <p class="font-normal text-xl app-text-secondary-100">Fast, reliable, and hassle-free car insurance for every journey.</p>
                 </div>
             </div>
+            <!-- <div class="absolute">
+                <img src="../assets/images/login/wheel_logo.png" alt="wheel">
+            </div> -->
         </div>
         <div class="w-5/12">
             <img class="w-full h-auto" src="../assets/images/login/car.png" alt="" srcset="">

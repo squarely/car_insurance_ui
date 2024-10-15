@@ -6,14 +6,14 @@ import { RouterLink, RouterView } from 'vue-router'
 
 <template>
   <MainComponent>
-    <div class="h-full w-full">
+    <div class="w-full px-12">
       <div class="font-sen flex justify-between items-center">
         <div class="flex items-center gap-3">
-            <div>
+            <!-- <div>
                 <img src="../assets/images/common/back_arrow.svg" alt="back" srcset="">
-            </div>
+            </div> -->
             <div>
-                <h6 class="font-bold text-2xl text-black">Assessment details</h6>
+                <h6 class="font-bold text-2xl app-text-secondary-400">Assessment details</h6>
                 <p class="font-normal text-xl app-text-secondary-300">#CN26569</p>
             </div>
         </div>
@@ -40,6 +40,33 @@ import { RouterLink, RouterView } from 'vue-router'
         </div>
         <div class="mt-2">
             <p class="text-base font-normal font-nunito app-text-secondary-300">Assigned on Sep 24, 2024 </p>
+        </div>
+        <div class="mt-4">
+            <div class="font-sen font-medium text-base app-text-secondary-400 bg-secondary-dark px-5 py-3 rounded-lg">
+                AI Repair Estimation
+            </div>
+            <div class="pl-5 pr-20 my-4">
+                <div class="flex items-center gap-24">
+                    <div>
+                        <h6 class="font-normal text-base font-sen app-text-secondary-300">AI repair estimation</h6>
+                        <h5 class="mt-2 font-extrabold text-base font-nunito app-text-secondary-400">$ 2500.00</h5>
+                    </div>
+                    <div>
+                        <h6 class="font-normal text-base font-sen app-text-secondary-300">Damaged parts</h6>
+                        <h5 class="mt-2 font-normal text-base font-nunito app-text-secondary-400">Hood, Front right door</h5>
+                    </div>
+                    <div>
+                        <h6 class="font-normal text-base font-sen app-text-secondary-300">Suggested settlement</h6>
+                        <h5 class="mt-2 font-extrabold text-base font-nunito app-text-secondary-400">$ 2200.00</h5>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <h6 class="font-normal text-base font-sen app-text-secondary-300">Damage detected</h6>
+                    <div class="mt-2">
+                        <img class="w-[294px]" src="../assets/images/demo/detected.png" alt="detected" srcset="">
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="mt-4">
             <div class="font-sen font-medium text-base app-text-secondary-400 bg-secondary-dark px-5 py-3 rounded-lg">

@@ -8,7 +8,7 @@ import { RouterLink, RouterView } from 'vue-router'
   <MainComponent>
     <div class="h-full w-full">
       <div class="font-sen flex justify-between items-center">
-        <h6 class="font-bold text-2xl text-black">Claims requested</h6>
+        <h6 class="font-bold text-2xl app-text-secondary-400">Claims requested</h6>
         <div
           class="bg-primary py-3 px-5 font-bold text-xl text-white text-center flex justify-center items-center gap-3 rounded-lg cursor-pointer"
         >
