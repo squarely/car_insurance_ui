@@ -6,12 +6,9 @@ import { RouterLink, RouterView } from 'vue-router'
 
 <template>
   <MainComponent>
-    <div class="w-full px-12">
+    <div class="w-full">
       <div class="font-sen flex justify-between items-center">
         <div class="flex items-center gap-3">
-            <!-- <div>
-                <img src="../assets/images/common/back_arrow.svg" alt="back" srcset="">
-            </div> -->
             <div>
                 <h6 class="font-bold text-2xl app-text-secondary-400">AI Repair Estimation</h6>
                 <p class="font-normal text-xl app-text-secondary-300">#CN26569</p>

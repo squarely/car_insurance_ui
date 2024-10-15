@@ -1,4 +1,34 @@
 <script setup>
+import { onMounted, ref } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
+
+import {useUserStore} from '../stores/user';
+
+const router = useRouter()
+
+const userStore = useUserStore();
+
+const userCrendentials = ref({
+    email: "vijayaraj.p@gmail.co",
+    password: "Password@12345"
+})
+
+// const {count, increment} = storeToRefs(store); 
+
+const submit = (event)=>{
+    event.preventDefault();
+
+    userStore.login(userCrendentials.value, (status) => {
+        if (status) {
+            router.push({
+                name: 'home'
+            })
+        }
+    })
+}
+onMounted(() => {
+
+})
 </script>
 
 <template>
@@ -10,14 +40,14 @@
                     <p class="font-normal text-2xl mt-3 app-text-dark-100">Enter the email and password to access the claims request.</p>
                 </div>
                 <div class="mt-10">
-                    <form class="flex flex-col justify-center">
+                    <form class="flex flex-col justify-center" @submit="submit($event)">
                         <div class="flex flex-col font-normal text-xl app-text-dark-100">
                             <label for="email">Email*</label>
-                            <input class="bg-secondary py-3.5 px-2 mt-2.5 rounded-lg" type="email" name="email" id="email">
+                            <input class="bg-secondary py-3.5 px-2 mt-2.5 rounded-lg" v-model="userCrendentials.email" type="email" name="email" id="email">
                         </div>
                         <div class="flex flex-col font-normal text-xl mt-8 app-text-dark-100">
                             <label for="password">Password*</label>
-                            <input class="bg-secondary py-3.5 px-2 mt-2.5 rounded-lg" type="password" name="password" id="password">
+                            <input class="bg-secondary py-3.5 px-2 mt-2.5 rounded-lg" v-model="userCrendentials.password" type="password" name="password" id="password">
                         </div>
                         <div class="mt-10">
                             <button class="bg-primary w-full py-5 rounded-lg font-bold text-xl text-white text-center flex justify-center items-center gap-3" type="submit">

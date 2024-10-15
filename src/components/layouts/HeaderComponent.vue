@@ -1,4 +1,19 @@
 <script setup>
+import { useUserStore } from '@/stores/user';
+import { onMounted, ref } from 'vue';
+const userStore = useUserStore();
+
+
+const userDetails = ref({
+  username: ''
+})
+
+onMounted(()=>{  
+  // userDetails.value.username = userStore.user.username
+  let user = JSON.parse(localStorage.getItem('user'))
+
+  userDetails.value.username = user.username
+})
 </script>
 
 <template>
@@ -8,7 +23,7 @@
     </div>
     <div class="flex items-center gap-8">
       <div>
-        <h6 class="font-medium text-xl font-nunito app-text-secondary-400">Oliver Putnam</h6>
+        <h6 class="font-medium text-xl font-nunito app-text-secondary-400">{{ userDetails.username }}</h6>
         <p class="font-normal text-base font-nunito app-text-secondary-300">Assessor</p>
       </div>
       <div>

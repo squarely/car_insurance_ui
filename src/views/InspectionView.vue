@@ -1,7 +1,32 @@
 <script setup>
 import MainComponent from "@/components/layouts/MainComponent.vue";
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterLink, RouterView, useRouter } from 'vue-router'
 
+import { useClaimStore } from "@/stores/claim";
+import { computed, onMounted, ref } from "vue";
+
+const claimStore = useClaimStore();
+const router = useRouter()
+
+let claims = ref([])
+
+const claimList = computed(() => {
+  return claimStore.claims
+})
+onMounted(()=>{
+  claimStore.getClaims((status)=>{
+
+  })
+})
+
+const redirectToPolicy = (id) => {
+  return router.push({
+    name: 'policy_details',
+    params: {
+      id: id
+    }
+  })
+}
 </script>
 
 <template>
@@ -68,30 +93,30 @@ import { RouterLink, RouterView } from 'vue-router'
               <th scope="col" class="px-6 py-3">Action</th>
             </tr>
           </thead>
-          <tbody class="font-nunito font-medium text-base app-text-secondary-400">
-            <tr class="bg-white tr-box-shadow">
+          <tbody class="font-nunito font-medium text-base app-text-secondary-400" v-if="claimList.length !== 0">
+            <tr class="bg-white tr-box-shadow capitalize" v-for="claim in claimList" :key="claim._id">
               <th
                 class="px-6 py-4 whitespace-nowrap font-nunito font-medium text-base app-text-secondary-400"
               >
-              #CN26569
+              #CN{{ claim.id }}
               </th>
-              <td class="px-6 py-4">John Doe <div class="font-nunito font-medium text-xs app-text-secondary-200"># DMC - 4583</div> </td>
-              <td class="px-6 py-4">24 Sep, 2024 </td>
-              <td class="px-6 py-4">Accident</td>
-              <td class="px-6 py-4">23 Sep, 2024 | 03:00 PM</td>
+              <td class="px-6 py-4">{{ claim.owner.username }} <div class="font-nunito font-medium text-xs app-text-secondary-200">{{ claim.vehicle.vehicleNumber }}</div> </td>
+              <td class="px-6 py-4">{{ claim.assignedDate }}</td>
+              <td class="px-6 py-4">{{ claim.incident.natureOfIncident }}</td>
+              <td class="px-6 py-4">{{ claim.incident.incidentDate }}</td>
               <td class="px-6 py-4">
                 <div class="flex items-center gap-3">
                   <div class="w-[12px] h-[12px] app-status-bg-pending rounded-full"></div>
-                  <p>Pending</p>
+                  <p>{{ claim.status }}</p>
                 </div>
               </td>
               <td class="px-6 py-4">
-                <div class="cursor-pointer text-base font-sen font-normal text-primary border-2 border-primary px-4 py-2.5 rounded-lg">
+                <div @click="redirectToPolicy(claim._id)" class="cursor-pointer text-base font-sen font-normal text-primary border-2 border-primary px-4 py-2.5 rounded-lg">
                   <div class="flex justify-center items-center gap-2">
                     <p>
-                      Start Assessment
+                      {{ claim.status === 'pending' ? 'Start Assessment' : 'View details' }}
                     </p>
-                    <img src="../assets/images/common/redirect_arrow_primary.png" alt="" srcset="">
+                    <img v-if="claim.status === 'pending'" src="../assets/images/common/redirect_arrow_primary.png" alt="" srcset="">
                   </div>
                 </div>
               </td>
