@@ -16,8 +16,6 @@ const userCrendentials = ref({
     password: "Password@12345"
 })
 
-// const {count, increment} = storeToRefs(store); 
-
 const submit = (event)=>{
     event.preventDefault();
 
@@ -49,8 +47,8 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="flex items-center w-full h-full">
-        <div class="flex relative justify-center items-center grow">
+    <div class="relative flex items-center w-full h-full">
+        <div class="flex justify-center items-center grow">
             <div class="mx-auto w-6/12">
                 <div class="font-sen text-center">
                     <h5 class="font-bold text-5xl">Welcome back!</h5>
@@ -78,12 +76,19 @@ onMounted(() => {
                     <p class="font-normal text-xl app-text-secondary-100">Fast, reliable, and hassle-free car insurance for every journey.</p>
                 </div>
             </div>
-            <!-- <div class="absolute">
-                <img src="../assets/images/login/wheel_logo.png" alt="wheel">
-            </div> -->
         </div>
         <div class="w-5/12">
             <img class="w-full h-auto" src="../assets/images/login/car.png" alt="" srcset="">
         </div>
+        <div class="absolute wheel-position">
+            <img src="../assets/images/login/wheel_logo.png" alt="wheel">
+        </div>
     </div>
 </template>
+
+<style scoped>
+.wheel-position{
+    top: 5%;
+    left: calc(100vw - 48.666667%);
+}
+</style>
