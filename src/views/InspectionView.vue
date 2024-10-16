@@ -5,17 +5,36 @@ import { RouterLink, RouterView, useRouter } from 'vue-router'
 import { useClaimStore } from "@/stores/claim";
 import { computed, onMounted, ref } from "vue";
 
+import { toast } from "vue3-toastify";
+import "vue3-toastify/dist/index.css";
+
 const claimStore = useClaimStore();
 const router = useRouter()
-
-let claims = ref([])
 
 const claimList = computed(() => {
   return claimStore.claims
 })
+const claimCount = computed(() => {
+  return claimStore.claimCount
+})
 onMounted(()=>{
+  claimStore.getClaimCount((status)=>{
+    if (!status) {
+      toast("Couldn't get the claims list count", {
+        "type": "error",
+        "autoClose": 5000,
+        "dangerouslyHTMLString": true
+      })
+    }
+  })
   claimStore.getClaims((status)=>{
-
+    if (!status) {
+      toast("Couldn't get the claims list", {
+        "type": "error",
+        "autoClose": 5000,
+        "dangerouslyHTMLString": true
+      })
+    }
   })
 })
 
@@ -34,13 +53,38 @@ const generateCustomUUID = () => {
   for (let i = 0; i < 17; i++) {
     uuid += chars.charAt(Math.floor(Math.random() * chars.length));
   }
-  // this.customUUID = uuid;
   console.log(uuid);
 
   claimStore.addNewClaim(uuid, (status)=>{
     if (status) {
       claimStore.getClaims((status)=>{
+        if (!status) {
+          toast("Couldn't get the claims list", {
+            "type": "error",
+            "autoClose": 5000,
+            "dangerouslyHTMLString": true
+          })
+        }
+      })
 
+      claimStore.getClaimCount((status)=>{
+        if (!status) {
+          toast("Couldn't get the claims list count", {
+            "type": "error",
+            "autoClose": 5000,
+            "dangerouslyHTMLString": true
+          })
+        }
+      })
+    }else{
+      claimStore.getClaims((status)=>{
+        if (!status) {
+          toast("Couldn't add a claim!", {
+            "type": "error",
+            "autoClose": 5000,
+            "dangerouslyHTMLString": true
+          })
+        }
       })
     }
   })
@@ -64,21 +108,20 @@ const generateCustomUUID = () => {
 
       <div class="font-sen flex items-center gap-9 mt-4">
         <div class="bg-white w-2/6 rounded-lg py-4 px-6">
-          <h5 class="font-extrabold text-3xl font-nunito">222</h5>
+          <h5 class="font-extrabold text-3xl font-nunito">{{ claimCount ? claimCount.total : '0' }}</h5>
           <div class="mt-1.5 flex items-center gap-3">
-            <!-- <div class="w-[12px] h-[12px] app-status-bg-pending rounded-full"></div> -->
             <p class="font-normal text-base app-text-secondary-200 font-nunito">Total Claims (till date)</p>
           </div>
         </div>
         <div class="bg-white w-2/6 rounded-lg py-4 px-6">
-          <h5 class="font-extrabold text-3xl font-nunito">222</h5>
+          <h5 class="font-extrabold text-3xl font-nunito">{{ claimCount ? claimCount.completed : '0' }}</h5>
           <div class="mt-1.5 flex items-center gap-3">
             <div class="w-[12px] h-[12px] app-status-bg-completed rounded-full"></div>
             <p class="font-normal text-base app-text-secondary-200 font-nunito">Completed claims</p>
           </div>
         </div>
         <div class="bg-white w-2/6 rounded-lg py-4 px-6">
-          <h5 class="font-extrabold text-3xl font-nunito">222</h5>
+          <h5 class="font-extrabold text-3xl font-nunito">{{ claimCount ? claimCount.pending : '0' }}</h5>
           <div class="mt-1.5 flex items-center gap-3">
             <div class="w-[12px] h-[12px] app-status-bg-pending rounded-full"></div>
             <p class="font-normal text-base app-text-secondary-200 font-nunito">Pending claims</p>
@@ -131,7 +174,7 @@ const generateCustomUUID = () => {
                 </div>
               </td>
               <td class="px-6 py-4">
-                <div @click="redirectToPolicy(claim._id)" class="cursor-pointer text-base font-sen font-normal text-primary border-2 border-primary px-4 py-2.5 rounded-lg">
+                <div @click="redirectToPolicy(claim._id)" class="cursor-pointer text-base font-sen font-medium text-primary border-2 border-primary px-4 py-2.5 rounded-lg">
                   <div class="flex justify-center items-center gap-2">
                     <p>
                       {{ claim.status === 'pending' ? 'Start Assessment' : 'View details' }}

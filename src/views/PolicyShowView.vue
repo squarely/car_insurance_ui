@@ -3,6 +3,8 @@ import MainComponent from "@/components/layouts/MainComponent.vue";
 import { useClaimStore } from "@/stores/claim";
 import { computed, onMounted, ref } from "vue";
 import { RouterLink, RouterView, useRouter, useRoute } from 'vue-router'
+import { toast } from "vue3-toastify";
+import "vue3-toastify/dist/index.css";
 
 const claimStore = useClaimStore();
 const route = useRoute()
@@ -20,6 +22,12 @@ onMounted(()=>{
     claimStore.getClaim(claimId,(status)=>{
         if (status) {
             isClaimData.value = true
+        }else{
+            toast("Couldn't get the policy detail.", {
+                "type": "error",
+                "autoClose": 5000,
+                "dangerouslyHTMLString": true
+            })
         }
     })
 })

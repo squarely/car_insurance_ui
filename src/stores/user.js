@@ -19,14 +19,18 @@ export const useUserStore = defineStore('user', () => {
         localStorage.setItem('user', JSON.stringify({
           username: user.value.username
         }))
-        cb(true)
+        cb(true, response.data)
       }else{
-        cb(false)
+        cb(false, null)
       }
       
     } catch (error) {
       console.error('error', error);
-      cb(false)
+      if (error.status === 500) {
+        cb(false, 'Something went wrong! Please try again later.')
+      }else{
+        cb(false, 'Invalid email or password')
+      }
     }
   }
 

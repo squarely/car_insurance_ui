@@ -5,6 +5,7 @@ import axios from "axios";
 
 export const useClaimStore = defineStore('claim', () => {
   const claims = ref([])
+  const claimCount = ref(null)
   const claimDetails = ref(null)
   const estimationReport = ref(null)
   const claimImages = ref({
@@ -23,6 +24,28 @@ export const useClaimStore = defineStore('claim', () => {
 
       if (response.data) {
         claims.value = response.data.data
+        cb(true)
+      }else{
+        cb(false)
+      }
+      
+    } catch (error) {
+      console.error('error', error);
+      cb(false)
+    }
+  }
+
+  async function getClaimCount(cb) {
+    const token = localStorage.getItem('api_token')
+    try {
+      const response = await API.get('claim/get/getClaimCount', {
+        headers: {
+          'Authorization': 'Bearer ' + token
+        }
+      });
+
+      if (response.data) {
+        claimCount.value = response.data
         cb(true)
       }else{
         cb(false)
@@ -183,5 +206,5 @@ export const useClaimStore = defineStore('claim', () => {
     }
   }
 
-  return { claims, claimDetails, claimImages, estimationReport, getClaims, getClaim, getClaimImage, uploadImage, generateEstimation, addNewClaim }
+  return { claims, claimCount, claimDetails, claimImages, estimationReport, getClaims, getClaim, getClaimImage, uploadImage, generateEstimation, addNewClaim, getClaimCount }
 })

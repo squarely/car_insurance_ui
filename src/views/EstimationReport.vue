@@ -3,6 +3,10 @@ import MainComponent from "@/components/layouts/MainComponent.vue";
 import { useClaimStore } from "@/stores/claim";
 import { computed, onMounted, ref } from "vue";
 import { useRoute, useRouter } from 'vue-router'
+
+import { toast } from "vue3-toastify";
+import "vue3-toastify/dist/index.css";
+
 const claimStore = useClaimStore();
 const route = useRoute()
 const router = useRouter()
@@ -17,6 +21,12 @@ onMounted(()=>{
     claimStore.getClaim(claimId,(status)=>{
         if (status) {
           
+        }else{
+          toast("Couldn't get the estimation report detail.", {
+                "type": "error",
+                "autoClose": 5000,
+                "dangerouslyHTMLString": true
+            })
         }
     })
     // claimStore.generateEstimation(claimId,(status)=>{

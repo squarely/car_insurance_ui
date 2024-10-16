@@ -4,6 +4,9 @@ import { useRouter, useRoute } from 'vue-router'
 
 import {useUserStore} from '../stores/user';
 
+import { toast } from "vue3-toastify";
+import "vue3-toastify/dist/index.css";
+
 const router = useRouter()
 
 const userStore = useUserStore();
@@ -18,11 +21,25 @@ const userCrendentials = ref({
 const submit = (event)=>{
     event.preventDefault();
 
-    userStore.login(userCrendentials.value, (status) => {
+    userStore.login(userCrendentials.value, (status, data) => {
         if (status) {
             router.push({
                 name: 'home'
             })
+        }else{
+            if (data) {
+                toast(data, {
+                    "type": "error",
+                    "autoClose": 5000,
+                    "dangerouslyHTMLString": true
+                })
+            }else{
+                toast("Couldn't process your request.", {
+                    "type": "error",
+                    "autoClose": 5000,
+                    "dangerouslyHTMLString": true
+                })
+            }
         }
     })
 }
