@@ -1,3 +1,59 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+img{
+    height: auto;
+}
+
+.font-sen{
+    font-family: "Sen";
+}
+
+.font-nunito{
+    font-family: "Nunito Sans", sans-serif;
+}
+
+.app-text-dark-100{
+    color: #333333;
+}
+
+.app-text-secondary-100{
+    color: #878787;
+}
+
+.app-text-secondary-200{
+    color: #7D7D7D;
+}
+
+.app-text-secondary-300{
+    color: #696969;
+}
+
+.app-text-secondary-400{
+    color: #373737;
+}
+
+.app-status-bg-pending{
+    background-color: #FC4848;
+}
+
+.app-status-bg-completed{
+    background-color: #6EE061;
+}
+
+.bg-secondary-light{
+    background-color: #EDF2F8;
+}
+.bg-secondary-dark{
+    background-color: #DBE2EA;
+}
+
+.app-bg-green-100{
+   background-color: #B8F495;
+}
