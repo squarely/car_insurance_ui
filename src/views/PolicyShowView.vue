@@ -24,13 +24,21 @@ onMounted(()=>{
     })
 })
 
-const redirectToImageUpload = (id) => {
-  return router.push({
-    name: 'image_upload',
-    params: {
-      id: id
+const redirectToImageUpload = (id, status) => {
+    if (status === 'completed') {
+        return router.push({
+                name: 'estimation_report',
+                params: {
+                id: id
+            }
+        })
     }
-  })
+    return router.push({
+        name: 'image_upload',
+        params: {
+        id: id
+        }
+    })
 }
 </script>
 
@@ -41,14 +49,14 @@ const redirectToImageUpload = (id) => {
         <div class="flex items-center gap-3">
             <div>
                 <h6 class="font-bold text-2xl app-text-secondary-400">Assessment details</h6>
-                <p class="font-normal text-xl app-text-secondary-300">#CN {{ claim ? claim.id : '--' }}</p>
+                <p class="font-normal text-xl app-text-secondary-300">#CN{{ claim ? claim.id : '--' }}</p>
             </div>
         </div>
         <div
-            @click="redirectToImageUpload(claim._id)"
+            @click="redirectToImageUpload(claim._id, claim.status)"
           class="bg-primary py-3 px-5 font-bold text-xl text-white text-center flex justify-center items-center gap-3 rounded-lg cursor-pointer"
         >
-          <p>Get AI Repair Estimation</p>
+          <p>{{ claim.status === 'completed' ? 'View AI Estimation' : 'Get AI Repair Estimation' }}</p>
           <img src="../assets/images/login/submit_logo.png" alt="" srcset="" />
         </div>
       </div>
@@ -57,7 +65,7 @@ const redirectToImageUpload = (id) => {
             <div class="flex justify-between items-center gap-8">
                 <h6 class="font-sen font-semibold app-text-secondary-400 text-4xl">#CN{{ claim.id }}</h6>
                 <div class="flex items-center gap-3">
-                    <div class="w-[12px] h-[12px] app-status-bg-pending rounded-full"></div>
+                    <div :class="`app-status-bg-${claim.status}`" class="w-[12px] h-[12px] rounded-full"></div>
                     <p class="font-normal text-base app-text-secondary-200 font-nunito">{{ claim.status }}</p>
                 </div>
             </div>
@@ -184,7 +192,7 @@ const redirectToImageUpload = (id) => {
                     </div>
                     <div class="w-1/3">
                         <h6 class="font-normal text-base font-sen app-text-secondary-300">VIN</h6>
-                        <h5 class="mt-2 font-normal text-base font-nunito app-text-secondary-400">1VXBR12EXCP901213</h5>
+                        <h5 class="mt-2 font-normal text-base font-nunito app-text-secondary-400">{{ claim.vehicle.vehicleIdentificationNumber ? claim.vehicle.vehicleIdentificationNumber : '--'  }}</h5>
                     </div>
                 </div>
                 <div class="mt-4 flex items-center w-full">

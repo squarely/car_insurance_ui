@@ -43,11 +43,11 @@ onMounted(() => {
                     <form class="flex flex-col justify-center" @submit="submit($event)">
                         <div class="flex flex-col font-normal text-xl app-text-dark-100">
                             <label for="email">Email*</label>
-                            <input class="bg-secondary py-3.5 px-2 mt-2.5 rounded-lg" v-model="userCrendentials.email" type="email" name="email" id="email">
+                            <input class="bg-secondary py-3.5 px-3 mt-2.5 rounded-lg" v-model="userCrendentials.email" type="email" name="email" id="email">
                         </div>
                         <div class="flex flex-col font-normal text-xl mt-8 app-text-dark-100">
                             <label for="password">Password*</label>
-                            <input class="bg-secondary py-3.5 px-2 mt-2.5 rounded-lg" v-model="userCrendentials.password" type="password" name="password" id="password">
+                            <input class="bg-secondary py-3.5 px-3 mt-2.5 rounded-lg" v-model="userCrendentials.password" type="password" name="password" id="password">
                         </div>
                         <div class="mt-10">
                             <button class="bg-primary w-full py-5 rounded-lg font-bold text-xl text-white text-center flex justify-center items-center gap-3" type="submit">

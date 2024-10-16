@@ -27,6 +27,25 @@ const redirectToPolicy = (id) => {
     }
   })
 }
+
+const generateCustomUUID = () => {
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  let uuid = '';
+  for (let i = 0; i < 17; i++) {
+    uuid += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  // this.customUUID = uuid;
+  console.log(uuid);
+
+  claimStore.addNewClaim(uuid, (status)=>{
+    if (status) {
+      claimStore.getClaims((status)=>{
+
+      })
+    }
+  })
+  
+}
 </script>
 
 <template>
@@ -35,6 +54,7 @@ const redirectToPolicy = (id) => {
       <div class="font-sen flex justify-between items-center">
         <h6 class="font-bold text-2xl app-text-secondary-400">Claims requested</h6>
         <div
+          @click="generateCustomUUID"
           class="bg-primary py-3 px-5 font-bold text-xl text-white text-center flex justify-center items-center gap-3 rounded-lg cursor-pointer"
         >
           <p>Add new claims</p>
@@ -106,7 +126,7 @@ const redirectToPolicy = (id) => {
               <td class="px-6 py-4">{{ claim.incident.incidentDate }}</td>
               <td class="px-6 py-4">
                 <div class="flex items-center gap-3">
-                  <div class="w-[12px] h-[12px] app-status-bg-pending rounded-full"></div>
+                  <div :class="`app-status-bg-${claim.status}`" class="w-[12px] h-[12px] rounded-full"></div>
                   <p>{{ claim.status }}</p>
                 </div>
               </td>

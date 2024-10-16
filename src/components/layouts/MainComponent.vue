@@ -1,7 +1,8 @@
 <script setup>
 import HeaderComponent from "@/components/layouts/HeaderComponent.vue";
-import { useRouter, useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 const route = useRoute()
+const router = useRouter()
 </script>
 
 <template>
@@ -9,7 +10,7 @@ const route = useRoute()
     <HeaderComponent />
     <div class="overflow-y-auto bg-secondary-light grow px-10 py-6">
       <div class="flex">
-        <div class="pr-5 cursor-pointer" v-if="route.path !== '/'">
+        <div @click="router.back()" class="pr-5 cursor-pointer" v-if="route.path !== '/'">
           <img class="mt-3" src="../../assets/images/common/back_arrow.svg" alt="back" srcset="">
         </div>
         <slot></slot>
