@@ -173,7 +173,7 @@ const redirectToImageUpload = (id, status) => {
                   <h5
                     class="mt-2 font-normal text-base font-nunito app-text-secondary-400"
                   >
-                    {{ claim.damagedParts }}
+                    {{ claim.damagedParts && claim.damagedParts.length ? claim.damagedParts : '--' }}
                   </h5>
                 </div>
                 <div>
