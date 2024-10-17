@@ -172,7 +172,7 @@ const redirectToPolicy = (id) => {
             </div>
             <div class="relative app-bg-blue-100 rounded-lg w-6/12 p-5 overflow-y-hidden">
               <h6 class="font-sen font-normal text-base app-text-secondary-300">
-                Suggested settlement amount based the policyn
+                Suggested settlement amount based the policy
               </h6>
               <h4
                 class="font-extrabold font-nunito text-3xl app-text-secondary-400 mt-2"
