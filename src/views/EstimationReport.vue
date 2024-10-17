@@ -186,7 +186,7 @@ const redirectToPolicy = (id) => {
               </svg>
             </div>
           </div>
-          <div class="mt-5 flex">
+          <div class="mt-5 mb-6 flex">
             <div class="w-6/12">
               <div class="pr-14">
                 <h6

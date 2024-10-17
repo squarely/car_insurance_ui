@@ -3,6 +3,8 @@ import MainComponent from "@/components/layouts/MainComponent.vue";
 import { useClaimStore } from "@/stores/claim";
 import { computed, onMounted, ref } from "vue";
 import { RouterLink, RouterView, useRouter, useRoute } from "vue-router";
+import timestampFormat from "../config/moment";
+
 import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
 
@@ -141,7 +143,7 @@ const redirectToImageUpload = (id, status) => {
           </div>
           <div class="mt-2">
             <p class="text-base font-normal font-nunito app-text-secondary-300">
-              {{ claim.assignedDate }}
+              Assigned on {{ timestampFormat(claim.assignedDate, "DD MMM, YYYY") }}
             </p>
           </div>
           <div class="mt-4" v-if="claim.status !== 'pending'">
@@ -151,7 +153,7 @@ const redirectToImageUpload = (id, status) => {
               AI Repair Estimation
             </div>
             <div class="pl-5 pr-20 my-4">
-              <div class="flex items-center gap-24">
+              <div class="flex items-start gap-24">
                 <div>
                   <h6
                     class="font-normal text-base font-sen app-text-secondary-300"
@@ -170,10 +172,22 @@ const redirectToImageUpload = (id, status) => {
                   >
                     Damaged parts
                   </h6>
+                  <template v-if="claim.damagedParts && claim.damagedParts.length">
+                    <div class="mt-2 capitalize flex flex-wrap items-center gap-1">
+                      <h5
+                        v-for="parts, index in claim.damagedParts"
+                        :key="index"
+                        class="font-extrabold text-base font-nunito app-text-secondary-400"
+                      >
+                        {{ parts }}{{ index === claim.damagedParts.length -1 ? '' : ',' }}
+                      </h5>
+                    </div>
+                  </template>
                   <h5
-                    class="mt-2 font-normal text-base font-nunito app-text-secondary-400"
+                    v-else
+                    class="mt-2 font-extrabold text-base font-nunito app-text-secondary-400"
                   >
-                    {{ claim.damagedParts && claim.damagedParts.length ? claim.damagedParts : '--' }}
+                    --
                   </h5>
                 </div>
                 <div>
@@ -259,7 +273,7 @@ const redirectToImageUpload = (id, status) => {
                   <h5
                     class="mt-2 font-normal text-base font-nunito app-text-secondary-400"
                   >
-                    {{ claim.policy.effectiveDate }}
+                    {{ timestampFormat(claim.policy.effectiveDate, "DD MMM, YYYY") }}
                   </h5>
                 </div>
                 <div>
@@ -271,7 +285,7 @@ const redirectToImageUpload = (id, status) => {
                   <h5
                     class="mt-2 font-normal text-base font-nunito app-text-secondary-400"
                   >
-                    {{ claim.policy.expiryDate }}
+                    {{ timestampFormat(claim.policy.expiryDate, "DD MMM, YYYY") }}
                   </h5>
                 </div>
               </div>
@@ -335,7 +349,7 @@ const redirectToImageUpload = (id, status) => {
                   <h5
                     class="mt-2 font-normal text-base font-nunito app-text-secondary-400"
                   >
-                    {{ claim.incident.incidentDate }}
+                    {{ timestampFormat(claim.incident.incidentDate, "DD MMM, YYYY | hh:mm A") }}
                   </h5>
                 </div>
               </div>

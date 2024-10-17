@@ -5,6 +5,8 @@ import { useRouter } from "vue-router";
 import { useClaimStore } from "@/stores/claim";
 import { computed, onMounted, ref } from "vue";
 
+import timestampFormat from "../config/moment";
+
 import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
 
@@ -228,9 +230,9 @@ const generateCustomUUID = () => {
                     {{ claim.vehicle.vehicleNumber }}
                   </div>
                 </td>
-                <td class="px-6 py-4">{{ claim.assignedDate }}</td>
+                <td class="px-6 py-4">{{ timestampFormat(claim.assignedDate, "DD MMM, YYYY") }}</td>
                 <td class="px-6 py-4">{{ claim.incident.natureOfIncident }}</td>
-                <td class="px-6 py-4">{{ claim.incident.incidentDate }}</td>
+                <td class="px-6 py-4">{{ timestampFormat(claim.incident.incidentDate, "DD MMM, YYYY | hh:mm A") }}</td>
                 <td class="px-6 py-4">
                   <div class="flex items-center gap-3">
                     <div

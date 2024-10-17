@@ -12,8 +12,8 @@ const router = useRouter()
 const userStore = useUserStore();
 
 const userCrendentials = ref({
-    email: "vijayaraj.p@gmail.co",
-    password: "Password@12345"
+    email: "",
+    password: ""
 })
 
 const submit = (event)=>{
@@ -52,7 +52,7 @@ onMounted(() => {
             <div class="mx-auto w-6/12">
                 <div class="font-sen text-center">
                     <h5 class="font-bold text-5xl">Welcome back!</h5>
-                    <p class="font-normal text-2xl mt-3 app-text-dark-100">Enter the email and password to access the claims request.</p>
+                    <p class="font-normal text-2xl mt-3 app-text-dark-100">Fast, reliable, and hassle-free car insurance for every journey.</p>
                 </div>
                 <div class="mt-10">
                     <form class="flex flex-col justify-center" @submit="submit($event)">
@@ -72,8 +72,9 @@ onMounted(() => {
                         </div>
                     </form>
                 </div>
-                <div class="mt-14 text-center">
-                    <p class="font-normal text-xl app-text-secondary-100">Fast, reliable, and hassle-free car insurance for every journey.</p>
+                <div class="mt-14 text-center flex items-center justify-center gap-3">
+                    <div class="font-normal text-xl app-text-secondary-100">Powered by</div>
+                    <img class="self-end" src="../assets/images/login/powered_by_logo.svg" alt="powered_by" srcset="">
                 </div>
             </div>
         </div>
